@@ -1,7 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { User } from './user.entity';
-import { Category } from './category.entity';
-import { Cost } from './cost.entity';
+import { User } from './user/user.entity';
+import { Category } from './category/category.entity';
+import { Cost } from './cost/cost.entity';
+import { CreateCategoryDto } from './category/create-category.dto';
+import { CreateCostDto } from './cost/create-cost.dto';
+import { CreateUserDto } from './user/create-user.dto';
 
 @Injectable()
 export class AppService {
@@ -9,7 +12,7 @@ export class AppService {
   USERS: User[] = [];
   CATEGORIES: Category[] = [];
   COSTS: Cost[] = [];
-  createUser(newUser: User): any {
+  createUser(newUser: CreateUserDto): any {
     let user = new User(newUser.id, newUser.name);
     this.USERS.push(user);
     console.log(this.USERS);
@@ -17,14 +20,14 @@ export class AppService {
   }
 
   
-  createCategory(newCategory: Category): any {
+  createCategory(newCategory: CreateCategoryDto): any {
     let category = new Category(newCategory.id, newCategory.title)
     this.CATEGORIES.push(category);
     console.log(this.CATEGORIES); 
   }
 
   
-  createCost(newCost: Cost): any {
+  createCost(newCost: CreateCostDto): any {
     
       let cost = new Cost(newCost.id, newCost.userId, newCost.categoryId, newCost.sum);
       this.COSTS.push(cost);
